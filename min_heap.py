@@ -102,19 +102,59 @@ class MinHeap:
         """
         TODO: Write this implementation
         """
-        pass
+
+        # last_index = self._heap.length() - 1
+        # index = (last_index-1) // 2
+        #
+        # while index > -1:
+        #     left = index * 2 + 1
+        #     right = index * 2 + 2
+        #     if self._heap.length() <= 2:
+        #         child = left
+        #     elif self._heap[left] <= self._heap[right]:
+        #         child = left
+        #     else:
+        #         child = right
+        #     if self._heap[child] < self._heap[index]:
+        #         # saves values
+        #         parent_value = self._heap[index]
+        #         child_value = self._heap[child]
+        #         # swaps values
+        #         self._heap[index] = child_value
+        #         self._heap[child] = parent_value
+        #     index -= 1
+
+        last_index = da.length() - 1
+        index = (last_index - 1) // 2
+        while index > -1:
+            left = index * 2 + 1
+            right = index * 2 + 2
+            if da.length() <= 2:
+                child = left
+            elif da[left] <= da[right]:
+                child = left
+            else:
+                child = right
+            if da[child] < da[index]:
+                # saves values
+                parent_value = da[index]
+                child_value = da[child]
+                # swaps values
+                da[index] = child_value
+                da[child] = parent_value
+            index -= 1
 
     def size(self) -> int:
         """
         TODO: Write this implementation
         """
-        pass
+        return self._heap.length()
 
     def clear(self) -> None:
         """
         TODO: Write this implementation
         """
-        pass
+        self._heap = DynamicArray()
 
 
 def heapsort(da: DynamicArray) -> None:
@@ -205,13 +245,13 @@ if __name__ == '__main__':
     while not h.is_empty() and h.is_empty() is not None:
         print(h, end=' ')
         print(h.remove_min())
-    # print("\nPDF - build_heap example 1")
-    # print("--------------------------")
-    # da = DynamicArray([100, 20, 6, 200, 90, 150, 300])
-    # h = MinHeap(['zebra', 'apple'])
-    # print(h)
-    # h.build_heap(da)
-    # print(h)
+    print("\nPDF - build_heap example 1")
+    print("--------------------------")
+    da = DynamicArray([100, 20, 6, 200, 90, 150, 300])
+    h = MinHeap(['zebra', 'apple'])
+    print(h)
+    h.build_heap(da)
+    print(h)
     # print("--------------------------")
     # print("Inserting 500 into input DA:")
     # da[0] = 500
@@ -232,17 +272,17 @@ if __name__ == '__main__':
     # print(f"Before: {da}")
     # heapsort(da)
     # print(f"After:  {da}")
-    # print("\nPDF - size example 1")
-    # print("--------------------")
-    # h = MinHeap([100, 20, 6, 200, 90, 150, 300])
-    # print(h.size())
-    # print("\nPDF - size example 2")
-    # print("--------------------")
-    # h = MinHeap([])
-    # print(h.size())
-    # print("\nPDF - clear example 1")
-    # print("---------------------")
-    # h = MinHeap(['monkey', 'zebra', 'elephant', 'horse', 'bear'])
-    # print(h)
-    # print(h.clear())
-    # print(h)
+    print("\nPDF - size example 1")
+    print("--------------------")
+    h = MinHeap([100, 20, 6, 200, 90, 150, 300])
+    print(h.size())
+    print("\nPDF - size example 2")
+    print("--------------------")
+    h = MinHeap([])
+    print(h.size())
+    print("\nPDF - clear example 1")
+    print("---------------------")
+    h = MinHeap(['monkey', 'zebra', 'elephant', 'horse', 'bear'])
+    print(h)
+    print(h.clear())
+    print(h)

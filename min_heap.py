@@ -41,12 +41,14 @@ class MinHeap:
         """
         TODO: Write this implementation
         """
+        # sets index and parent index
         index = self._heap.length()
         parent = (index-1)//2
         if self._heap.is_empty():
             self._heap.append(node)
         else:
-            self._heap.insert_at_index(index, node)
+            # uses
+            self._heap.append(node)
             _percolate_down(self._heap, parent)
         return
 

@@ -209,19 +209,19 @@ class DynamicArray:
                 new_capacity = self.length() * 2
                 self.resize(new_capacity)
 
-        da_index = index
+        # da_index = index
         # if last index
         if self._size - 1 == index:
             self._size -= 1
             return
 
-        # shifts vals to the right takes off end
-        while da_index != self._size - 1:
-            self.set_at_index(da_index, self.get_at_index(da_index + 1))
-            da_index += 1
-            if da_index == self._data.length() - 1:
-                self.set_at_index(da_index, None)
-        self._size -= 1
+        # # shifts vals to the right takes off end
+        # while da_index != self._size - 1:
+        #     self.set_at_index(da_index, self.get_at_index(da_index + 1))
+        #     da_index += 1
+        #     if da_index == self._data.length() - 1:
+        #         self.set_at_index(da_index, None)
+        # self._size -= 1
 
     def slice(self, start_index: int, size: int) -> "DynamicArray":
         """

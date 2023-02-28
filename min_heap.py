@@ -78,6 +78,7 @@ class MinHeap:
         """
         TODO: Write this implementation
         """
+        # if empty
         if self._heap.is_empty():
             raise MinHeapException
         else:
@@ -87,7 +88,15 @@ class MinHeap:
         """
         TODO: Write this implementation
         """
-        pass
+        # if empty
+        if self._heap.is_empty():
+            raise MinHeapException
+        last_node = self._heap[self._heap.length() - 1]
+        removed_node = self._heap[0]
+        self._heap[0] = last_node
+        self._heap.remove_at_index(self._heap.length() - 1)
+        _percolate_down(self._heap, 0)
+        return removed_node
 
     def build_heap(self, da: DynamicArray) -> None:
         """
@@ -122,7 +131,44 @@ def _percolate_down(da: DynamicArray, parent: int) -> None:
     """
     TODO: Write your implementation
     """
-    pass
+    left = parent * 2 + 1
+    right = parent * 2 + 2
+    # has no children
+    if da.length() <= 1:
+        return
+    # if only has left child
+    if da.length() == 2:
+        child_index = left
+    else:
+        # picks smallest child
+        if da[left] <= da[right]:
+            child_index = left
+        else:
+            child_index = right
+
+    while da[parent] > da[child_index]:
+        # saves values
+        parent_value = da[parent]
+        child_value = da[child_index]
+        # swaps values
+        da[parent] = child_value
+        da[child_index] = parent_value
+        # moves nodes down the heap
+        parent = child_index
+        left = parent * 2 + 1
+        right = parent * 2 + 2
+        # if no children
+        if left >= da.length():
+            return
+        # if one child(left)
+        if right >= da.length():
+            child_index = left
+        # if two children
+        elif da[left] <= da[right]:
+            child_index = left
+        else:
+            child_index = right
+
 
 # ------------------- BASIC TESTING -----------------------------------------
 if __name__ == '__main__':
@@ -153,12 +199,12 @@ if __name__ == '__main__':
     h = MinHeap(['fish', 'bird'])
     print(h)
     print(h.get_min(), h.get_min())
-    # print("\nPDF - remove_min example 1")
-    # print("--------------------------")
-    # h = MinHeap([1, 10, 2, 9, 3, 8, 4, 7, 5, 6])
-    # while not h.is_empty() and h.is_empty() is not None:
-    #     print(h, end=' ')
-    #     print(h.remove_min())
+    print("\nPDF - remove_min example 1")
+    print("--------------------------")
+    h = MinHeap([8, 9, 10])
+    while not h.is_empty() and h.is_empty() is not None:
+        print(h, end=' ')
+        print(h.remove_min())
     # print("\nPDF - build_heap example 1")
     # print("--------------------------")
     # da = DynamicArray([100, 20, 6, 200, 90, 150, 300])

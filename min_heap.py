@@ -42,14 +42,27 @@ class MinHeap:
         TODO: Write this implementation
         """
         # sets index and parent index
-        index = self._heap.length()
-        parent = (index-1)//2
+        child = self._heap.length()
+        parent = (child-1)//2
         if self._heap.is_empty():
             self._heap.append(node)
         else:
-            # uses
+            # uses append to add at the end of DA
             self._heap.append(node)
-            _percolate_down(self._heap, parent)
+            # percolates up to root node
+            while parent > - 1:
+                if self._heap[child] >= self._heap[parent]:
+                    return
+                if self._heap[child] < self._heap[parent]:
+                    # saves values
+                    parent_value = self._heap[parent]
+                    child_value = self._heap[child]
+                    # swaps values
+                    self._heap[parent] = child_value
+                    self._heap[child] = parent_value
+                    # moves nodes up the heap
+                    child = parent
+                    parent = (parent - 1) // 2
         return
 
     def is_empty(self) -> bool:
@@ -65,7 +78,7 @@ class MinHeap:
         """
         TODO: Write this implementation
         """
-        pass
+        return self._heap[0]
 
     def remove_min(self) -> object:
         """
@@ -106,21 +119,7 @@ def _percolate_down(da: DynamicArray, parent: int) -> None:
     """
     TODO: Write your implementation
     """
-    child = da.length() - 1
-
-    while parent > - 1:
-        if da[child] >= da[parent]:
-            return
-        if da[child] < da[parent]:
-            parent_value = da[parent]
-            child_value = da[child]
-            da[parent] = child_value
-            da[child] = parent_value
-            child = parent
-            parent = (parent-1)//2
-
-
-
+    pass
 
 # ------------------- BASIC TESTING -----------------------------------------
 if __name__ == '__main__':
@@ -138,19 +137,19 @@ if __name__ == '__main__':
     for value in ['monkey', 'zebra', 'elephant', 'horse', 'bear']:
         h.add(value)
         print(h)
-    # print("\nPDF - is_empty example 1")
-    # print("-------------------")
-    # h = MinHeap([2, 4, 12, 56, 8, 34, 67])
-    # print(h.is_empty())
-    # print("\nPDF - is_empty example 2")
-    # print("-------------------")
-    # h = MinHeap()
-    # print(h.is_empty())
-    # print("\nPDF - get_min example 1")
-    # print("-----------------------")
-    # h = MinHeap(['fish', 'bird'])
-    # print(h)
-    # print(h.get_min(), h.get_min())
+    print("\nPDF - is_empty example 1")
+    print("-------------------")
+    h = MinHeap([2, 4, 12, 56, 8, 34, 67])
+    print(h.is_empty())
+    print("\nPDF - is_empty example 2")
+    print("-------------------")
+    h = MinHeap()
+    print(h.is_empty())
+    print("\nPDF - get_min example 1")
+    print("-----------------------")
+    h = MinHeap(['fish', 'bird'])
+    print(h)
+    print(h.get_min(), h.get_min())
     # print("\nPDF - remove_min example 1")
     # print("--------------------------")
     # h = MinHeap([1, 10, 2, 9, 3, 8, 4, 7, 5, 6])

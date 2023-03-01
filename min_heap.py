@@ -140,15 +140,19 @@ def heapsort(da: DynamicArray) -> None:
     while last_index != 0:
         min = da[0]
         temp = da[last_index]
-        da[0] = temp
-        da[last_index] = min
+        if last_index == 1:
+            if min > temp:
+                da[0] = min
+        else:
+            da[0] = temp
+            da[last_index] = min
         # last_index -= 1
         parent = 0
         left = 1
         right = 2
         index_bounds = left + right
         # percolate down to last index
-        while index_bounds < last_index * 2:
+        while index_bounds < last_index * 2 - 1:
             if last_index == 2:
                 child = left
             elif da[left] <= da[right]:
@@ -283,27 +287,28 @@ if __name__ == '__main__':
         print("Error: input array and heap's underlying DA reference same object in memory")
     print("\nPDF - heapsort example 1")
     print("------------------------")
-    da = DynamicArray([100, 20, 6, 200, 90, 150, 300])
+    da = DynamicArray([-20793, -15449, 57859, -51444, -59389, -51444, -82759, -70567, -69800])
     print(f"Before: {da}")
     heapsort(da)
     print(f"After:  {da}")
+    print("right answer-> [57859, -15449, -20793, -51444, -51444, -59389, -69800, -70567, -82759]")
     print("\nPDF - heapsort example 2")
-    print("------------------------")
-    da = DynamicArray(['monkey', 'zebra', 'elephant', 'horse', 'bear'])
-    print(f"Before: {da}")
-    heapsort(da)
-    print(f"After:  {da}")
-    print("\nPDF - size example 1")
-    print("--------------------")
-    h = MinHeap([100, 20, 6, 200, 90, 150, 300])
-    print(h.size())
-    print("\nPDF - size example 2")
-    print("--------------------")
-    h = MinHeap([])
-    print(h.size())
-    print("\nPDF - clear example 1")
-    print("---------------------")
-    h = MinHeap(['monkey', 'zebra', 'elephant', 'horse', 'bear'])
-    print(h)
-    print(h.clear())
-    print(h)
+    # print("------------------------")
+    # da = DynamicArray(['monkey', 'zebra', 'elephant', 'horse', 'bear'])
+    # print(f"Before: {da}")
+    # heapsort(da)
+    # print(f"After:  {da}")
+    # print("\nPDF - size example 1")
+    # print("--------------------")
+    # h = MinHeap([100, 20, 6, 200, 90, 150, 300])
+    # print(h.size())
+    # print("\nPDF - size example 2")
+    # print("--------------------")
+    # h = MinHeap([])
+    # print(h.size())
+    # print("\nPDF - clear example 1")
+    # print("---------------------")
+    # h = MinHeap(['monkey', 'zebra', 'elephant', 'horse', 'bear'])
+    # print(h)
+    # print(h.clear())
+    # print(h)

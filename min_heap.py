@@ -143,6 +143,9 @@ def heapsort(da: DynamicArray) -> None:
         if last_index == 1:
             if min > temp:
                 da[0] = min
+            else:
+                da[0] = temp
+                da[last_index] = min
         else:
             da[0] = temp
             da[last_index] = min
@@ -287,7 +290,7 @@ if __name__ == '__main__':
         print("Error: input array and heap's underlying DA reference same object in memory")
     print("\nPDF - heapsort example 1")
     print("------------------------")
-    da = DynamicArray([-20793, -15449, 57859, -51444, -59389, -51444, -82759, -70567, -69800])
+    da = DynamicArray([-31843, 71540, -90778, 15048, -24440, -41354, 81415, -12257, 61379])
     print(f"Before: {da}")
     heapsort(da)
     print(f"After:  {da}")

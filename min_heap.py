@@ -104,6 +104,7 @@ class MinHeap:
         """
         self._heap = DynamicArray(da)
         last_index = self._heap.length() - 1
+        # gets last parent index
         index = (last_index-1) // 2
 
         while index > -1:
@@ -128,16 +129,59 @@ def heapsort(da: DynamicArray) -> None:
     TODO: Write this implementation
     """
 
-    elements = da.length()
     last_index = da.length() - 1
-    while elements > 0:
+    # gets last parent index
+    index = (last_index - 1) // 2
+    # builds valid heap
+    while index > -1:
+        _percolate_down(da, index)
+        index -= 1
+
+    while last_index != 0:
         min = da[0]
         temp = da[last_index]
         da[0] = temp
         da[last_index] = min
+        # last_index -= 1
+        parent = 0
+        left = 1
+        right = 2
+        index_bounds = left + right
+        # percolate down to last index
+        while index_bounds < last_index * 2:
+            if last_index == 2:
+                child = left
+            elif da[left] <= da[right]:
+                child = left
+            else:
+                child = right
+            if da[child] >= da[parent]:
+                index_bounds = last_index * 2
+            else:
+                # saves values
+                parent_value = da[parent]
+                child_value = da[child]
+                # swaps values
+                da[parent] = child_value
+                da[child] = parent_value
+                # moves nodes up the heap
+                parent = child
+                left = parent * 2 + 1
+                right = parent * 2 + 2
+                # picks smallest child
+                index_bounds = left + right
         last_index -= 1
-        elements -= 1
-        _percolate_down(da, 0)
+
+    # elements = da.length()
+    # last_index = da.length() - 1
+    # while elements > 0:
+    #     min = da[0]
+    #     temp = da[last_index]
+    #     da[0] = temp
+    #     da[last_index] = min
+    #     last_index -= 1
+    #     elements -= 1
+    #     _percolate_down(da, 0)
 
 
 # It's highly recommended that you implement the following optional          #

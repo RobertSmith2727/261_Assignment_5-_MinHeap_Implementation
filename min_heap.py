@@ -107,23 +107,7 @@ class MinHeap:
         index = (last_index-1) // 2
 
         while index > -1:
-            left = index * 2 + 1
-            right = index * 2 + 2
-            if right > last_index:
-                right = left
-            if self._heap.length() <= 2:
-                child = left
-            elif self._heap[left] <= self._heap[right]:
-                child = left
-            else:
-                child = right
-            if self._heap[child] < self._heap[index]:
-                # saves values
-                parent_value = self._heap[index]
-                child_value = self._heap[child]
-                # swaps values
-                self._heap[index] = child_value
-                self._heap[child] = parent_value
+            _percolate_down(self._heap, index)
             index -= 1
 
     def size(self) -> int:
@@ -171,12 +155,13 @@ def _percolate_down(da: DynamicArray, parent: int) -> None:
     # if only has left child
     if da.length() == 2:
         child_index = left
-    else:
+    elif right >= da.length():
+        child_index = left
         # picks smallest child
-        if da[left] <= da[right]:
-            child_index = left
-        else:
-            child_index = right
+    elif da[left] <= da[right]:
+        child_index = left
+    else:
+        child_index = right
 
     while da[parent] > da[child_index]:
         # saves values
@@ -239,8 +224,8 @@ if __name__ == '__main__':
         print(h.remove_min())
     print("\nPDF - build_heap example 1")
     print("--------------------------")
-    da = DynamicArray([-34106, 24651, 48447, 32206, -59462, -53181, 96302, 93863, 32819, 25250])
-    h = MinHeap([-32675, -26124, 27628, 66316, 33871, 34052, 77874, 76307])
+    da = DynamicArray([28671, -6005, 96598, -69130])
+    h = MinHeap([28671])
     print(h)
     h.build_heap(da)
     print(h)

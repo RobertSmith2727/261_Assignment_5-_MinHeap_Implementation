@@ -102,46 +102,26 @@ class MinHeap:
         """
         TODO: Write this implementation
         """
+        self._heap = DynamicArray(da)
+        last_index = self._heap.length() - 1
+        index = (last_index-1) // 2
 
-        # last_index = self._heap.length() - 1
-        # index = (last_index-1) // 2
-        #
-        # while index > -1:
-        #     left = index * 2 + 1
-        #     right = index * 2 + 2
-        #     if self._heap.length() <= 2:
-        #         child = left
-        #     elif self._heap[left] <= self._heap[right]:
-        #         child = left
-        #     else:
-        #         child = right
-        #     if self._heap[child] < self._heap[index]:
-        #         # saves values
-        #         parent_value = self._heap[index]
-        #         child_value = self._heap[child]
-        #         # swaps values
-        #         self._heap[index] = child_value
-        #         self._heap[child] = parent_value
-        #     index -= 1
-
-        last_index = da.length() - 1
-        index = (last_index - 1) // 2
         while index > -1:
             left = index * 2 + 1
             right = index * 2 + 2
-            if da.length() <= 2:
+            if self._heap.length() <= 2:
                 child = left
-            elif da[left] <= da[right]:
+            elif self._heap[left] <= self._heap[right]:
                 child = left
             else:
                 child = right
-            if da[child] < da[index]:
+            if self._heap[child] < self._heap[index]:
                 # saves values
-                parent_value = da[index]
-                child_value = da[child]
+                parent_value = self._heap[index]
+                child_value = self._heap[child]
                 # swaps values
-                da[index] = child_value
-                da[child] = parent_value
+                self._heap[index] = child_value
+                self._heap[child] = parent_value
             index -= 1
 
     def size(self) -> int:
@@ -161,7 +141,17 @@ def heapsort(da: DynamicArray) -> None:
     """
     TODO: Write this implementation
     """
-    pass
+
+    elements = da.length()
+    last_index = da.length() - 1
+    while elements > 0:
+        min = da[0]
+        temp = da[last_index]
+        da[0] = temp
+        da[last_index] = min
+        last_index -= 1
+        elements -= 1
+        _percolate_down(da, 0)
 
 
 # It's highly recommended that you implement the following optional          #
@@ -252,26 +242,26 @@ if __name__ == '__main__':
     print(h)
     h.build_heap(da)
     print(h)
-    # print("--------------------------")
-    # print("Inserting 500 into input DA:")
-    # da[0] = 500
-    # print(da)
-    # print("Your MinHeap:")
-    # print(h)
-    # if h.get_min() == 500:
-    #     print("Error: input array and heap's underlying DA reference same object in memory")
-    # print("\nPDF - heapsort example 1")
-    # print("------------------------")
-    # da = DynamicArray([100, 20, 6, 200, 90, 150, 300])
-    # print(f"Before: {da}")
-    # heapsort(da)
-    # print(f"After:  {da}")
-    # print("\nPDF - heapsort example 2")
-    # print("------------------------")
-    # da = DynamicArray(['monkey', 'zebra', 'elephant', 'horse', 'bear'])
-    # print(f"Before: {da}")
-    # heapsort(da)
-    # print(f"After:  {da}")
+    print("--------------------------")
+    print("Inserting 500 into input DA:")
+    da[0] = 500
+    print(da)
+    print("Your MinHeap:")
+    print(h)
+    if h.get_min() == 500:
+        print("Error: input array and heap's underlying DA reference same object in memory")
+    print("\nPDF - heapsort example 1")
+    print("------------------------")
+    da = DynamicArray([100, 20, 6, 200, 90, 150, 300])
+    print(f"Before: {da}")
+    heapsort(da)
+    print(f"After:  {da}")
+    print("\nPDF - heapsort example 2")
+    print("------------------------")
+    da = DynamicArray(['monkey', 'zebra', 'elephant', 'horse', 'bear'])
+    print(f"Before: {da}")
+    heapsort(da)
+    print(f"After:  {da}")
     print("\nPDF - size example 1")
     print("--------------------")
     h = MinHeap([100, 20, 6, 200, 90, 150, 300])

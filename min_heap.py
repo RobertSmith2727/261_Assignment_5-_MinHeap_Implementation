@@ -136,29 +136,29 @@ def heapsort(da: DynamicArray) -> None:
     while index > -1:
         _percolate_down(da, index)
         index -= 1
-
+    # trades min with last val
     while last_index != 0:
         min = da[0]
         temp = da[last_index]
+        # makes valid swap for last two nodes
         if last_index == 1:
             if min > temp:
                 da[0] = min
             else:
                 da[0] = temp
                 da[last_index] = min
+        # swaps nodes
         else:
             da[0] = temp
             da[last_index] = min
-        # last_index -= 1
+
         parent = 0
         left = 1
         right = 2
         index_bounds = left + right
         # percolate down to last index
         while index_bounds < last_index * 2 - 1:
-            if last_index == 2:
-                child = left
-            elif da[left] <= da[right]:
+            if da[left] <= da[right]:
                 child = left
             else:
                 child = right

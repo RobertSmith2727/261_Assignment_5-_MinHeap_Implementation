@@ -1,9 +1,11 @@
-# Name:
-# OSU Email:
-# Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Name: Robert Smith
+# OSU Email: Smithro8@oregonstate.edu
+# Course:       CS261 - Data Structures
+# Assignment: 5
+# Due Date: 03/05/2023
+# Description: Creates a min heap class using a dynamic array. Has various methods to add,
+#              remove, sort the heap etc.
+
 from dynamic_array import *
 
 
@@ -39,7 +41,7 @@ class MinHeap:
 
     def add(self, node: object) -> None:
         """
-        TODO: Write this implementation
+        Adds a node object to the heap
         """
         # sets index and parent index
         child = self._heap.length()
@@ -67,7 +69,8 @@ class MinHeap:
 
     def is_empty(self) -> bool:
         """
-        TODO: Write this implementation
+        Returns true if empty
+        Else false
         """
         if self._heap.is_empty():
             return True
@@ -76,7 +79,8 @@ class MinHeap:
 
     def get_min(self) -> object:
         """
-        TODO: Write this implementation
+        Gets the min mode (top node)
+        Exception if empty
         """
         # if empty
         if self._heap.is_empty():
@@ -86,7 +90,8 @@ class MinHeap:
 
     def remove_min(self) -> object:
         """
-        TODO: Write this implementation
+        Removes the min node (top)
+        Exception if empty
         """
         # if empty
         if self._heap.is_empty():
@@ -100,7 +105,7 @@ class MinHeap:
 
     def build_heap(self, da: DynamicArray) -> None:
         """
-        TODO: Write this implementation
+        Builds a heap out of a passed array
         """
         self._heap = DynamicArray(da)
         last_index = self._heap.length() - 1
@@ -113,20 +118,21 @@ class MinHeap:
 
     def size(self) -> int:
         """
-        TODO: Write this implementation
+        Returns the size od the heap
         """
         return self._heap.length()
 
     def clear(self) -> None:
         """
-        TODO: Write this implementation
+        Clears the heap
         """
         self._heap = DynamicArray()
 
 
 def heapsort(da: DynamicArray) -> None:
     """
-    TODO: Write this implementation
+    Receives an array, builds a heap in place
+    Sorts the heap
     """
 
     last_index = da.length() - 1
@@ -158,12 +164,15 @@ def heapsort(da: DynamicArray) -> None:
         index_bounds = left + right
         # percolate down to last index
         while index_bounds < last_index * 2 - 1:
+            # sets lowest val to child
             if da[left] <= da[right]:
                 child = left
             else:
                 child = right
+            # stop if child >= parent
             if da[child] >= da[parent]:
                 index_bounds = last_index * 2
+            # swaps child and parent
             else:
                 # saves values
                 parent_value = da[parent]
@@ -171,32 +180,18 @@ def heapsort(da: DynamicArray) -> None:
                 # swaps values
                 da[parent] = child_value
                 da[child] = parent_value
-                # moves nodes up the heap
+                # moves nodes down the heap
                 parent = child
                 left = parent * 2 + 1
                 right = parent * 2 + 2
-                # picks smallest child
+                # keeps saved vals safe
                 index_bounds = left + right
         last_index -= 1
 
-    # elements = da.length()
-    # last_index = da.length() - 1
-    # while elements > 0:
-    #     min = da[0]
-    #     temp = da[last_index]
-    #     da[0] = temp
-    #     da[last_index] = min
-    #     last_index -= 1
-    #     elements -= 1
-    #     _percolate_down(da, 0)
 
-
-# It's highly recommended that you implement the following optional          #
-# function for percolating elements down the MinHeap. You can call           #
-# this from inside the MinHeap class. You may edit the function definition.  #
 def _percolate_down(da: DynamicArray, parent: int) -> None:
     """
-    TODO: Write your implementation
+    percolates down the heap
     """
     left = parent * 2 + 1
     right = parent * 2 + 2

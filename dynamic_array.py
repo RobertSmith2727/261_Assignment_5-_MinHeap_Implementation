@@ -1,7 +1,7 @@
 # Name: Robert Smith
 # OSU Email: Smithro8@oregonstate.edu
 # Course:       CS261 - Data Structures
-# Assignment: 3
+# Assignment: 5
 # Due Date: 02/13/2023
 # Description: A dynamic array data structure that has a lot of methods to act similar to
 #              python list and features associated with python lists.

@@ -184,6 +184,15 @@ class DynamicArray:
             if self._data[da_index] is None:
                 da_index -= 1
 
+    def pop(self) -> None:
+
+        # empty array
+        if self._size == 0:
+            raise DynamicArrayException
+
+        self._size -= 1
+        return
+
     def remove_at_index(self, index: int) -> None:
         """
         Removes value at specific index

@@ -99,7 +99,7 @@ class MinHeap:
         last_node = self._heap[self._heap.length() - 1]
         removed_node = self._heap[0]
         self._heap[0] = last_node
-        self._heap.remove_at_index(self._heap.length() - 1)
+        self._heap.pop()
         _percolate_down(self._heap, 0)
         return removed_node
 

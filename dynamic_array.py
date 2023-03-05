@@ -185,10 +185,22 @@ class DynamicArray:
                 da_index -= 1
 
     def pop(self) -> None:
-
+        """
+        removes the last index in the arr
+        """
         # empty array
         if self._size == 0:
             raise DynamicArrayException
+
+        if self.length() * 2 < 10 and self.get_capacity() > 10:
+            if self.length() / self.get_capacity() < 0.25:
+                self.resize(10)
+
+        # resize to twice the size of length
+        if self.length() * 2 > 10:
+            if self.length() / self.get_capacity() < 0.25:
+                new_capacity = self.length() * 2
+                self.resize(new_capacity)
 
         self._size -= 1
         return
@@ -218,19 +230,19 @@ class DynamicArray:
                 new_capacity = self.length() * 2
                 self.resize(new_capacity)
 
-        # da_index = index
+        da_index = index
         # if last index
         if self._size - 1 == index:
             self._size -= 1
             return
 
-        # # shifts vals to the right takes off end
-        # while da_index != self._size - 1:
-        #     self.set_at_index(da_index, self.get_at_index(da_index + 1))
-        #     da_index += 1
-        #     if da_index == self._data.length() - 1:
-        #         self.set_at_index(da_index, None)
-        # self._size -= 1
+        # shifts vals to the right takes off end
+        while da_index != self._size - 1:
+            self.set_at_index(da_index, self.get_at_index(da_index + 1))
+            da_index += 1
+            if da_index == self._data.length() - 1:
+                self.set_at_index(da_index, None)
+        self._size -= 1
 
     def slice(self, start_index: int, size: int) -> "DynamicArray":
         """
